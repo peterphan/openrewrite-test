@@ -30,6 +30,22 @@ public class SimplifyBoolean {
     return randomBoolean();
   }
 
+  public static boolean test6() {
+    if (randomBoolean()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public static boolean test7() {
+    if (randomBoolean()) {
+      return randomBoolean();
+    } else {
+      return false;
+    }
+  }
+
   private static boolean randomBoolean() {
     Random rd = new Random();
     return rd.nextBoolean();

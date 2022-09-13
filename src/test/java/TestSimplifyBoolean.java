@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.RecipeRun;
-import org.openrewrite.Result;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.cleanup.SimplifyBooleanExpression;
 import org.openrewrite.java.cleanup.SimplifyBooleanReturn;
@@ -20,12 +19,43 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestSimplifyBoolean {
 
   @Test
-  public void testSimplifyBoolean() throws Exception {
+  public void testSimplifyBooleanExpression() throws Exception {
     Path sourceFilePath = getResourcePath("SimplifyBoolean.java");
-    String expected = getResourceContents("Target-SimplifyBoolean.java");
+    String expected = getResourceContents("Target-SimplifyBooleanExpression.java");
 
     SimplifyBooleanExpression recipe = new SimplifyBooleanExpression();
-    recipe.doNext(new SimplifyBooleanReturn());
+
+    JavaParser javaParser = JavaParser.fromJavaVersion().classpath(Collections.emptyList()).build();
+
+    InMemoryExecutionContext ctx = new InMemoryExecutionContext();
+    List<J.CompilationUnit> cus = javaParser.parse(List.of(sourceFilePath), getResourcePath("."), ctx);
+    RecipeRun recipeRun = recipe.run(cus, ctx, 10);
+
+    String actual = recipeRun.getResults().get(0).getAfter().printAll();
+    assertEquals(expected, actual);
+  }
+
+  /**
+   * This recipe seems to simplify
+   * <pre>
+   *   if (whatever) {
+   *     return true;
+   *   } else {
+   *     return false;
+   *   }
+   * </pre>
+   * to
+   * <pre>
+   *   return true;
+   * </pre>
+   * @throws Exception
+   */
+  @Test
+  public void testSimplifyBooleanReturn() throws Exception {
+    Path sourceFilePath = getResourcePath("SimplifyBoolean.java");
+    String expected = getResourceContents("Target-SimplifyBooleanReturn.java");
+
+    SimplifyBooleanReturn recipe = new SimplifyBooleanReturn();
 
     JavaParser javaParser = JavaParser.fromJavaVersion().classpath(Collections.emptyList()).build();
 

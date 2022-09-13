@@ -47,11 +47,7 @@ public class SimplifyBoolean {
   }
 
   public static boolean test8() {
-    if (randomBoolean()) {
-      return true;
-    } else {
-      return false;
-    }
+    return randomBoolean();
   }
 
   private static boolean randomBoolean() {
