@@ -66,11 +66,13 @@ public class SimplifyConstants extends Recipe {
             }
             
             private J.Binary simplifySubtraction(J.Binary binary) {
-                // x - 0 → x
+                // Identity operation: x - 0 → x
+                // When subtracting zero from any expression, return the left operand
                 if (isIntegerLiteral(binary.getRight(), 0)) {
                     return (J.Binary) binary.getLeft().withPrefix(binary.getPrefix());
                 }
                 // Constant folding: 5 - 2 → 3
+                // When both operands are integer literals, compute the result at compile time
                 if (isIntegerLiteral(binary.getLeft()) && isIntegerLiteral(binary.getRight())) {
                     int left = getIntegerValue(binary.getLeft());
                     int right = getIntegerValue(binary.getRight());
