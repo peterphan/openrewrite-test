@@ -1,15 +1,6 @@
 public class SimplifyConstants {
 
 
-    public static int testIdentityOperations(int x) {
-        int a = x;
-        int b = x;
-        int c = x;
-        int d = x;
-        int e = x;
-        int f = x;
-        return a + b + c + d + e + f;
-    }
 
     public static int testZeroMultiplication(int x) {
         int a = 0;
