@@ -163,6 +163,11 @@ public class SimplifyConstants extends Recipe {
                 return binary;
             }
             
+            /**
+             * Checks if the given expression is an integer literal.
+             * @param expression the AST expression to check
+             * @return true if the expression is a literal containing an Integer value, false otherwise
+             */
             private boolean isIntegerLiteral(J expression) {
                 return expression instanceof J.Literal && ((J.Literal) expression).getValue() instanceof Integer;
             }
