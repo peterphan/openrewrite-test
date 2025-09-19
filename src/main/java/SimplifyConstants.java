@@ -4,16 +4,6 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
 
-/**
- * Simplifies constant arithmetic expressions and other constant values.
- * Examples:
- * - 1 + 2 → 3
- * - 5 * 0 → 0
- * - x * 1 → x
- * - x + 0 → x
- * - true && true → true
- * - false || false → false
- */
 public class SimplifyConstants extends Recipe {
 
     @Override

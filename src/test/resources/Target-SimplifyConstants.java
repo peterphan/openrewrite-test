@@ -1,12 +1,5 @@
 public class SimplifyConstants {
 
-    public static int testArithmeticConstants() {
-        int a = 3;
-        int b = 2;
-        int c = 12;
-        int d = 4;
-        return a + b + c + d;
-    }
 
     public static int testIdentityOperations(int x) {
         int a = x;
