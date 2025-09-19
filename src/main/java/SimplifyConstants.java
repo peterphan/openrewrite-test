@@ -207,15 +207,23 @@ public class SimplifyConstants extends Recipe {
                 return (J.Binary) literal;
             }
             
+            /**
+             * Creates a new boolean literal AST node with the given value.
+             * Preserves formatting and metadata from the original binary expression.
+             * @param value the boolean value for the new literal (true or false)
+             * @param original the original binary expression to copy formatting from
+             * @return a new J.Binary node containing the boolean literal
+             */
             private J.Binary createBooleanLiteral(boolean value, J.Binary original) {
+                // Create a new literal node with the boolean value
                 J.Literal literal = new J.Literal(
-                    original.getId(),
-                    original.getPrefix(),
-                    original.getMarkers(),
-                    value,
-                    String.valueOf(value),
-                    null,
-                    null
+                    original.getId(),           // Preserve original node ID
+                    original.getPrefix(),       // Preserve whitespace/formatting
+                    original.getMarkers(),      // Preserve any markers/annotations
+                    value,                      // The boolean value (true/false)
+                    String.valueOf(value),      // String representation ("true"/"false")
+                    null,                       // No type information needed
+                    null                        // No additional metadata
                 );
                 return (J.Binary) literal;
             }
