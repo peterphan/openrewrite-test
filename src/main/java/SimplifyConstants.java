@@ -36,8 +36,10 @@ public class SimplifyConstants extends Recipe {
                 }
                 
                 // Handle boolean operations
+                // Simplify logical AND expressions (&&)
                 if (binary.getOperator() == J.Binary.Type.And) {
                     return simplifyBooleanAnd(binary);
+                // Simplify logical OR expressions (||)
                 } else if (binary.getOperator() == J.Binary.Type.Or) {
                     return simplifyBooleanOr(binary);
                 }
