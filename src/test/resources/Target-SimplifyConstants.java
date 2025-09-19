@@ -8,12 +8,22 @@ public class SimplifyConstants {
         return a + b;
     }
 
+    public static Object[][] booleanConstantsData() {
+        return new Object[][] {
+            {true},     // Should become: true
+            {false},    // Should become: false
+            {true},     // Should become: true
+            {false}     // Should become: false
+        };
+    }
+
     public static boolean testBooleanConstants() {
-        boolean a = true;
-        boolean b = false;
-        boolean c = true;
-        boolean d = false;
-        return a && b && c && d;
+        Object[][] data = booleanConstantsData();
+        boolean result = true;
+        for (Object[] testCase : data) {
+            result = result && (Boolean) testCase[0];
+        }
+        return result;
     }
 
     public static boolean testBooleanIdentity(boolean x) {
@@ -32,10 +42,20 @@ public class SimplifyConstants {
         return a && b && c && d;
     }
 
+    public static Object[][] complexExpressionsData(int x) {
+        return new Object[][] {
+            {x},        // Should become: x
+            {3 * x},    // Should become: 3 * x
+            {x * 5}     // Should become: x * 5
+        };
+    }
+
     public static int testComplexExpressions(int x) {
-        int a = x;
-        int b = 3 * x;
-        int c = x * 5;
-        return a + b + c;
+        Object[][] data = complexExpressionsData(x);
+        int result = 0;
+        for (Object[] testCase : data) {
+            result += (Integer) testCase[0];
+        }
+        return result;
     }
 }
